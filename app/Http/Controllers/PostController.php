@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index(){
         // $posts = Post::all();
         //$posts = Auth::user()->posts;
-        $posts = Auth::user()->posts()->paginate(1);
+        $posts = Auth::user()->posts()->paginate(5);
         return view('Posts.index', compact('posts'));
     }
 
