@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +27,13 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/home', [PostController::class, 'index'])->name('home');
 
 });
+
+Route::group(['middleware' => 'auth:adminPanel'], function () {
+    Route::resource('/admin/users', AdminUserController::class);
+    Route::resource('/admin/posts', AdminPostController::class);
+
+});
+
 Auth::routes();
 
 

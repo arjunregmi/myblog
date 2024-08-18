@@ -63,7 +63,7 @@ class UsersTableSeeder extends Seeder
             'role_id' => $roleId,
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('admin'),
+            'password' => Hash::make('adminadmin'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
