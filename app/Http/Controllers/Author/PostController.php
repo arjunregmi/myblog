@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Author;
 
+use App\Http\Controllers\Controller;
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class PostController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
@@ -18,14 +18,14 @@ class PostController extends Controller
         //$posts = Auth::user()->posts;
         //dd(auth()->user()->role?->name);
         $posts = Auth::user()->posts()->paginate(5);
-        return view('Posts.index', compact('posts'));
+        return view('Author.index', compact('posts'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create(){
-        return view('Posts.create');
+        return view('Author.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class PostController extends Controller
             'content' => 'required|string|max:255'
         ]);
         Post::create($request->all());
-        return redirect()->route('posts.index')->with('status','Post Created Successfully');
+        return redirect()->route('author.index')->with('status','Post Created Successfully');
     }
 
     /**
@@ -48,7 +48,7 @@ class PostController extends Controller
         if(Auth::id() != $post->user_id){
             abort(403);
         }
-        return view('Posts.show',compact('post'));
+        return view('Author.show',compact('post'));
     }
 
     /**
@@ -56,7 +56,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('Posts.edit',compact('post'));
+        return view('Author.edit',compact('post'));
     }
 
     /**
@@ -69,7 +69,7 @@ class PostController extends Controller
             'content' => 'required|string|max:255'
         ]);
         $post->update($request->all());
-        return redirect()->route('posts.index')->with('status','Post Updated Successfully');
+        return redirect()->route('author.index')->with('status','Post Updated Successfully');
     }
 
     /**
@@ -78,7 +78,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('posts.index')->with('status','Post Deleted Successfully');  
+        return redirect()->route('author.index')->with('status','Post Deleted Successfully');  
     }
-
-   }
+}
