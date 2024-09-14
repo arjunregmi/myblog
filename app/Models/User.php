@@ -5,7 +5,11 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+
+// use Illuminate\Foundation\Auth\User as Authenticatable;
+use MongoDB\Laravel\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -22,6 +26,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -44,7 +49,30 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function posts(): HasMany {
-        return $this->hasMany(post::class);
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
+
+
+    public function getRole($role)
+    {
+        return $this->$role;
+      
+    }
+
+    /**
+     * Check if the user has the admin role.
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+    public function isAuthor(): bool
+    {
+       
+        return $this->role === 'author';
     }
 }
