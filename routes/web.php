@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\PhotoController;
-use App\Http\Controllers\Backend\PostController;
-use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
