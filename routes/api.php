@@ -25,5 +25,5 @@ Route::controller(RegisterController::class)->group(function(){
 
 Route::middleware('auth:sanctum')->group( function () {
     Route::resource('/blog-posts', PostController::class);
-    Route::get('/blog-posts/{id}', [BlogPostController::class, 'show']);
+    Route::get('/blog-posts/{id}', [PostController::class, 'show']);
 });
